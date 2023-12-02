@@ -172,10 +172,7 @@ class BASE_EXPORT MessagePumpForUI : public MessagePumpWin {
   void RemoveObserver(Observer* observer);
 
  private:
-  bool MessageCallback(UINT message,
-                       WPARAM wparam,
-                       LPARAM lparam,
-                       LRESULT* result);
+  bool MessageCallback(UINT message, WPARAM wparam, LPARAM lparam, LRESULT* result);
 
   // 真实执行消息循环的函数
   void DoRunLoop() override;
