@@ -45,12 +45,10 @@ int64_t SysInfo::AmountOfPhysicalMemory() {
 
 // static
 int64_t SysInfo::AmountOfAvailablePhysicalMemory() {
-  if (base::CommandLine::ForCurrentProcess()->HasSwitch(
-          switches::kEnableLowEndDeviceMode)) {
+  if (base::CommandLine::ForCurrentProcess()->HasSwitch(switches::kEnableLowEndDeviceMode)) {
     // Estimate the available memory by subtracting our memory used estimate
     // from the fake |kLowMemoryDeviceThresholdMB| limit.
-    int64_t memory_used =
-        AmountOfPhysicalMemoryImpl() - AmountOfAvailablePhysicalMemoryImpl();
+    int64_t memory_used = AmountOfPhysicalMemoryImpl() - AmountOfAvailablePhysicalMemoryImpl();
     int64_t memory_limit = kLowMemoryDeviceThresholdMB * 1024 * 1024;
     // std::min ensures no underflow, as |memory_used| can be > |memory_limit|.
     return memory_limit - std::min(memory_used, memory_limit);

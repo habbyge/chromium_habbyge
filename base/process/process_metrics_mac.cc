@@ -192,8 +192,7 @@ int ProcessMetrics::GetEnergyImpact() {
     return 0;
   }
 
-  double total_energy_impact =
-      GetEnergyImpactInternal(TaskForPid(process_), now);
+  double total_energy_impact = GetEnergyImpactInternal(TaskForPid(process_), now);
   uint64_t delta = now - last_energy_impact_time_;
   if (delta == 0)
     return 0;
@@ -278,8 +277,10 @@ bool GetSystemMemoryInfo(SystemMemoryInfoKB* meminfo) {
   struct host_basic_info hostinfo;
   mach_msg_type_number_t count = HOST_BASIC_INFO_COUNT;
   base::mac::ScopedMachSendRight host(mach_host_self());
-  int result = host_info(host.get(), HOST_BASIC_INFO,
-                         reinterpret_cast<host_info_t>(&hostinfo), &count);
+  int result = host_info(host.get(),
+                         HOST_BASIC_INFO,
+                         reinterpret_cast<host_info_t>(&hostinfo),
+                         &count);
   if (result != KERN_SUCCESS)
     return false;
 

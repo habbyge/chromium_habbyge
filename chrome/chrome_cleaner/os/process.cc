@@ -98,6 +98,7 @@ bool GetSystemResourceUsage(HANDLE process, SystemResourceUsage* stats) {
     return false;
   }
 
+  // windows：获取当前进程中的内存使用情况
   PROCESS_MEMORY_COUNTERS pmc;
   if (::GetProcessMemoryInfo(::GetCurrentProcess(), &pmc, sizeof(pmc))) {
     stats->peak_working_set_size = pmc.PeakWorkingSetSize;

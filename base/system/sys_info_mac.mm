@@ -56,8 +56,7 @@ std::string SysInfo::OperatingSystemVersion() {
 void SysInfo::OperatingSystemVersionNumbers(int32_t* major_version,
                                             int32_t* minor_version,
                                             int32_t* bugfix_version) {
-  NSOperatingSystemVersion version =
-      [[NSProcessInfo processInfo] operatingSystemVersion];
+  NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
   *major_version = version.majorVersion;
   *minor_version = version.minorVersion;
   *bugfix_version = version.patchVersion;
@@ -79,7 +78,8 @@ int64_t SysInfo::AmountOfPhysicalMemoryImpl() {
   struct host_basic_info hostinfo;
   mach_msg_type_number_t count = HOST_BASIC_INFO_COUNT;
   base::mac::ScopedMachSendRight host(mach_host_self());
-  int result = host_info(host.get(), HOST_BASIC_INFO,
+  int result = host_info(host.get(),
+                         HOST_BASIC_INFO,
                          reinterpret_cast<host_info_t>(&hostinfo), &count);
   if (result != KERN_SUCCESS) {
     NOTREACHED();

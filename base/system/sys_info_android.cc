@@ -146,8 +146,7 @@ int GetDalvikHeapSizeMB() {
     LOG(ERROR) << "Can't parse dalvik.vm.heapsize: " << heap_size_str;
     result = base::SysInfo::AmountOfPhysicalMemoryMB() / 3;
   }
-  result =
-      std::min<int64_t>(std::max<int64_t>(32 * MB, result), 1024 * MB) / MB;
+  result = std::min<int64_t>(std::max<int64_t>(32 * MB, result), 1024 * MB) / MB;
   return static_cast<int>(result);
 }
 
@@ -199,7 +198,9 @@ void SysInfo::OperatingSystemVersionNumbers(int32_t* major_version,
                                             int32_t* minor_version,
                                             int32_t* bugfix_version) {
   std::string version_string;
-  GetOsVersionStringAndNumbers(&version_string, major_version, minor_version,
+  GetOsVersionStringAndNumbers(&version_string,
+                               major_version,
+                               minor_version,
                                bugfix_version);
 }
 

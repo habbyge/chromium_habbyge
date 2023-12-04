@@ -211,11 +211,11 @@ bool GetSystemMemoryInfo(SystemMemoryInfoKB* meminfo) {
   mem_status.dwLength = sizeof(mem_status);
   if (!::GlobalMemoryStatusEx(&mem_status))
     return false;
-
-  meminfo->total = mem_status.ullTotalPhys / 1024;
-  meminfo->avail_phys = mem_status.ullAvailPhys / 1024;
-  meminfo->swap_total = mem_status.ullTotalPageFile / 1024;
-  meminfo->swap_free = mem_status.ullAvailPageFile / 1024;
+  // https://learn.microsoft.com/zh-cn/windows/win32/api/sysinfoapi/ns-sysinfoapi-memorystatusex
+  meminfo->total = mem_status.ullTotalPhys / 1024; // 实际物理内存
+  meminfo->avail_phys = mem_status.ullAvailPhys / 1024; // 当前可用的物理内存量
+  meminfo->swap_total = mem_status.ullTotalPageFile / 1024; // 系统或当前进程的当前已提交内存限制
+  meminfo->swap_free = mem_status.ullAvailPageFile / 1024; // 当前进程可以提交的最大内存量（以字节为单位）
 
   return true;
 }
