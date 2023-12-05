@@ -47,7 +47,7 @@
 #include "base/threading/platform_thread.h"
 #endif
 
-namespace base {
+namespace base { // metrics是“指标”的意思
 
 class Value;
 
