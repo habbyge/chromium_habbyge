@@ -68,8 +68,8 @@ vs-chromium-project.txt
 /.settings/
 /.vs/
 # Visual Studio Code
-.vscode/
-.vscode-server/
+# .vscode/
+# .vscode-server/
 /_out
 /android_emulator_sdk
 /ash/ash_unittests_run.xml
