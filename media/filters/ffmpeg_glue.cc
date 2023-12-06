@@ -104,7 +104,7 @@ bool FFmpegGlue::OpenContext(bool is_local_file) {
 
   // By passing nullptr for the filename (second parameter) we are telling
   // FFmpeg to use the AVIO context we setup from the AVFormatContext structure.
-  const int ret =
+  const int ret = // 打开音视频文件
       avformat_open_input(&format_context_, nullptr, nullptr, nullptr);
 
   // If FFmpeg can't identify the file, read the first 8k and attempt to guess

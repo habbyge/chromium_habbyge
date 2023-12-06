@@ -52,6 +52,7 @@ bool AudioFileReader::OpenDemuxer() {
     return false;
   }
 
+  // 从文件中提取流信息
   const int result = avformat_find_stream_info(format_context, NULL);
   if (result < 0) {
     DLOG(WARNING)
@@ -86,12 +87,14 @@ bool AudioFileReader::OpenDemuxer() {
 }
 
 bool AudioFileReader::OpenDecoder() {
+  // 查找对应的解码器
   const AVCodec* codec = avcodec_find_decoder(codec_context_->codec_id);
   if (codec) {
     // MP3 decodes to S16P which we don't support, tell it to use S16 instead.
     if (codec_context_->sample_fmt == AV_SAMPLE_FMT_S16P)
       codec_context_->request_sample_fmt = AV_SAMPLE_FMT_S16;
 
+    // 打开编解码器
     const int result = avcodec_open2(codec_context_.get(), codec, nullptr);
     if (result < 0) {
       DLOG(WARNING) << "AudioFileReader::Open() : could not open codec -"
@@ -204,6 +207,11 @@ bool AudioFileReader::ReadPacketForTesting(AVPacket* output_packet) {
 }
 
 bool AudioFileReader::ReadPacket(AVPacket* output_packet) {
+  // 不停的从码流中提取出帧数据:
+  // 解码一帧压缩数据: avcodec_send_packet()
+  // 接收解码后的数据 :avcodec_receive_frame()
+  // 发送未编码的数据: avcodec_send_frame()
+  // 接收编码后的数据: avcodec_receive_packet()
   while (av_read_frame(glue_->format_context(), output_packet) >= 0) {
     // Skip packets from other streams.
     if (output_packet->stream_index != stream_index_) {

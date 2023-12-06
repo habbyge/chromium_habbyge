@@ -1257,6 +1257,7 @@ void FFmpegDemuxer::OnOpenContextDone(bool result) {
   // Fully initialize AVFormatContext by parsing the stream a little.
   base::PostTaskAndReplyWithResult(
       blocking_task_runner_.get(), FROM_HERE,
+      // 从文件中提取流信息
       base::BindOnce(&avformat_find_stream_info, glue_->format_context(),
                      static_cast<AVDictionary**>(nullptr)),
       base::BindOnce(&FFmpegDemuxer::OnFindStreamInfoDone,

@@ -54,6 +54,7 @@ bool MediaFileChecker::Start(base::TimeDelta check_time) {
   if (!glue.OpenContext())
     return false;
 
+  // 从文件中提取流信息
   if (avformat_find_stream_info(format_context, NULL) < 0)
     return false;
 
