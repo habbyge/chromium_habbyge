@@ -103,13 +103,6 @@
         "charconv": "cpp"
     },
 
-    "C_Cpp.default.compilerPath": "/usr/bin/clang++",
-    "clang.cxxflags": [
-        "-std=c++17",
-        "-O3",
-        "-flto",
-        "-Wl",
-    ],
     "java.configuration.runtimes": [
         {
             "name": "JavaSE-17",
@@ -139,14 +132,22 @@
     "screencastMode.fontSize": 20,
     "terminal.integrated.fontFamily": "Menlo for Powerline",
     "chat.editor.fontSize": 10,
-    "C_Cpp.intelliSenseEngineFallback": "enabled",
     "terminal.integrated.lineHeight": 0,
     "notebook.output.fontSize": 10,
     "notebook.markup.fontSize": 10,
     "chat.editor.fontFamily": "Menlo for Powerline",
+
+    // c/c++ && clangd
+    "C_Cpp.default.compilerPath": "/usr/bin/clang++",
+    "clang.cxxflags": [
+        "-std=c++17",
+        "-O3",
+        "-flto",
+        "-Wl",
+    ],
     "C_Cpp.codeAnalysis.clangTidy.enabled": true,
-    "C_Cpp.codeAnalysis.clangTidy.config": "~/pc_project/videoeditor/.clang-tidy",
-    "C_Cpp.codeAnalysis.clangTidy.fallbackConfig": "~/pc_project/videoeditor/.clang-tidy",
+    "C_Cpp.codeAnalysis.clangTidy.config": "${workspaceFolder}/.clang-tidy",
+    "C_Cpp.codeAnalysis.clangTidy.fallbackConfig": "${workspaceFolder}/.clang-tidy",
     "C_Cpp.codeAnalysis.clangTidy.checks.enabled": [
         "*"
     ],
@@ -175,5 +176,107 @@
 
     "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
     "git.ignoreLimitWarning": true,
-    "C_Cpp.errorSquiggles": "enabled"
+    "C_Cpp.errorSquiggles": "enabled",
+    "C_Cpp.intelliSenseEngineFallback": "enabled",
+    "C_Cpp.intelliSenseEngine": "default",
+    "C_Cpp.autocomplete": "default",
+    "clangd.path": "",
+    // "clangd.fallbackFlags": [
+    //     // 设置clangd代码检查的c++版本
+    //     "-std=c++17",
+    //     "-pedantic",
+    //     "-Wall",
+    //     "-Wextra",
+    //     "-Wcast-align",
+    //     "-Wdouble-promotion",
+    //     "-Wformat=2",
+    //     "-Wimplicit-fallthrough",
+    //     "-Wmisleading-indentation",
+    //     "-Wnon-virtual-dtor",
+    //     "-Wnull-dereference",
+    //     "-Wold-style-cast",
+    //     "-Woverloaded-virtual",
+    //     "-Wpedantic",
+    //     "-Wshadow",
+    //     "-Wunused",
+    //     "-pthread",
+    //     "-fuse-ld=lld",
+    //     "-fsanitize=address",
+    //     "-fsanitize=undefined",
+    //     "-stdlib=libc++",
+
+    //     "-I${workspaceFolder}/", // 项目根目录
+    //     // "-I~/pc_project/videoeditor/pc_config/vesdk/mac/_pod_work_dir/VESDK_Mac/include/",
+    //     "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/",
+    //     "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/",
+    //     "-I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/",
+    //     "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/",
+    //     "-I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/",
+    //     "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/",
+    //     "-I~/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/",
+    //     "-I/Users/bytedance/Mbox-Project-iOS/develop/Pods/TTVideoEditor",
+    // ],
+    // "clangd.arguments": [
+    //     "--all-scopes-completion",
+    //     "--clang-tidy-checks=performance-*, bugprone-*, misc-*, google-*, modernize-*, readability-*, portability-*",
+    //     "--header-insertion=never",
+    //     "--background-index",
+    //     "--compile-commands-dir=build/",
+    //     "--completion-parse=auto", // 当 clangd 准备就绪时，用它来分析建议
+    //     "-j=8",
+    //     "--cross-file-rename",
+    //     "--clang-tidy",
+    //     "--completion-style=detailed",
+    //     "--header-insertion=iwyu",
+    //     "--j=5",
+    //     "--pch-storage=disk",
+    //     "--log=verbose",
+    //     "--query-driver=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++"
+    // ],
+
+    // 官网: https://clang.llvm.org/extra/clang-tidy/checks/list.html
+    // "C_Cpp.codeAnalysis.clangTidy.checks.enabled": [
+    //     "*",
+    //     // "google-*",
+    //     // "cppcoreguidelines-*",
+    //     // "clang-*",
+    //     // "readability-*",
+    //     // "clang-analyzer-*",
+    //     // "-clang-analyzer-cplusplus*",
+    //     "bugprone-argument-comment",
+    //     "bugprone-dangling-handle",
+    //     "bugprone-inaccurate-erase",
+    //     "bugprone-string-constructor",
+    //     "bugprone-string-integer-assignment",
+    //     "bugprone-unused-raii",
+    //     "bugprone-use-after-move",
+    //     "google-build-explicit-make-pair",
+    //     "google-explicit-constructor",
+    //     "google-readability-casting",
+    //     "modernize-avoid-bind",
+    //     "modernize-loop-convert",
+    //     "modernize-make-shared",
+    //     "modernize-make-unique",
+    //     "modernize-redundant-void-arg",
+    //     "modernize-replace-random-shuffle",
+    //     "modernize-shrink-to-fit",
+    //     "modernize-use-bool-literals",
+    //     "modernize-use-default-member-init",
+    //     "modernize-use-emplace",
+    //     "modernize-use-equals-default",
+    //     "modernize-use-equals-delete",
+    //     "modernize-use-noexcept",
+    //     "modernize-use-nullptr",
+    //     "modernize-use-override",
+    //     "modernize-use-transparent-functors",
+    //     "readability-redundant-member-init",
+    //     "clang-analyzer-core.uninitialized.UndefReturn",
+    //     "bugprone-posix-return",
+    //     "bugprone-unused-return-value",
+    //     "clang-analyzer-cplusplus.NewDeleteLeaks"
+    // ],
+    // "clang-tidy.compilerArgs": [
+    //     "-p /Users/bytedance/android-ndk-r21e/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/"
+    // ],
+
 }

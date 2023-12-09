@@ -15,7 +15,7 @@
 
 namespace base {
 
-namespace {
+namespace {xxxx
 
 #if defined(OS_APPLE) || defined(OS_LINUX) || defined(OS_CHROMEOS) || \
     defined(OS_AIX)
