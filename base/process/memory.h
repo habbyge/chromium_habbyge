@@ -30,6 +30,8 @@ BASE_EXPORT void TerminateBecauseOutOfMemory(size_t size);
 // Records the size of the allocation that caused the current OOM crash, for
 // consumption by Breakpad.
 // TODO: this can be removed when Breakpad is no longer supported.
+// 记录导致当前 OOM 崩溃的分配大小，以供 Breakpad 使用。
+// TODO：当不再支持 Breakpad 时，可以将其删除。
 BASE_EXPORT extern size_t g_oom_size;
 
 #if defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_ANDROID) || \
@@ -77,11 +79,8 @@ const DWORD kOomExceptionCode = 0xe0000008;
 // specifically ASan and other sanitizers.
 // Return value tells whether the allocation succeeded. If it fails |result| is
 // set to NULL, otherwise it holds the memory address.
-BASE_EXPORT WARN_UNUSED_RESULT bool UncheckedMalloc(size_t size,
-                                                    void** result);
-BASE_EXPORT WARN_UNUSED_RESULT bool UncheckedCalloc(size_t num_items,
-                                                    size_t size,
-                                                    void** result);
+BASE_EXPORT WARN_UNUSED_RESULT bool UncheckedMalloc(size_t size, void** result);
+BASE_EXPORT WARN_UNUSED_RESULT bool UncheckedCalloc(size_t num_items, size_t size, void** result);
 
 }  // namespace base
 

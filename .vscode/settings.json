@@ -103,20 +103,6 @@
         "charconv": "cpp"
     },
 
-    "java.configuration.runtimes": [
-        {
-            "name": "JavaSE-17",
-            "path": "/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home",
-        },
-        {
-            "name": "JavaSE-1.8",
-            "path": "/Library/Java/JavaVirtualMachines/jdk1.8.0_151.jdk/Contents/Home",
-        }
-    ],
-    "java.jdt.ls.java.home": "/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home",
-    "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/jdk1.8.0_151.jdk/Contents/Home",
-    "kotlin.java.home": "/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home",
-    "maven.terminal.useJavaHome": false,
     "debug.console.fontSize": 10,
     "editor.fontFamily": "Menlo for Powerline",
     "debug.console.fontFamily": "Menlo",
@@ -137,29 +123,33 @@
     "notebook.markup.fontSize": 10,
     "chat.editor.fontFamily": "Menlo for Powerline",
 
-    // c/c++ && clangd
-    "C_Cpp.default.compilerPath": "/usr/bin/clang++",
-    "clang.cxxflags": [
-        "-std=c++17",
-        "-O3",
-        "-flto",
-        "-Wl",
+    // java
+    "java.referencesCodeLens.enabled": true,
+    "java.signatureHelp.enabled": true,
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-17",
+            "path": "/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home",
+        },
+        {
+            "default": true,
+            "name": "JavaSE-1.8",
+            "path": "/Library/Java/JavaVirtualMachines/jdk1.8.0_151.jdk/Contents/Home",
+        }
     ],
-    "C_Cpp.codeAnalysis.clangTidy.enabled": true,
-    "C_Cpp.codeAnalysis.clangTidy.config": "${workspaceFolder}/.clang-tidy",
-    "C_Cpp.codeAnalysis.clangTidy.fallbackConfig": "${workspaceFolder}/.clang-tidy",
-    "C_Cpp.codeAnalysis.clangTidy.checks.enabled": [
-        "*"
-    ],
+    "java.jdt.ls.java.home": "/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home",
+    "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/jdk1.8.0_151.jdk/Contents/Home",
+    "kotlin.java.home": "/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home",
+    "maven.terminal.useJavaHome": false,
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m -Xlog:disable",
+
     "editor.mouseWheelScrollSensitivity": 0.2,
     "search.useIgnoreFiles": false,
     "editor.lineHeight": 1.2,
     "files.trimTrailingWhitespace": false,
     "editor.trimAutoWhitespace": false,
-    "C_Cpp.inlayHints.autoDeclarationTypes.enabled": false,
     "editor.inlayHints.fontFamily": "Menlo",
     "editor.inlayHints.fontSize": 10,
-    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m -Xlog:disable",
     "notebook.output.fontFamily": "Menlo",
     "editor.codeLensFontSize": 10,
 
@@ -174,109 +164,138 @@
         "lua": "lua",
     },
 
-    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
     "git.ignoreLimitWarning": true,
+
+    // reviewer
+    "acid-gitlab-mr.gitlabServer": "https://code.byted.org/",
+    "acid-gitlab-mr.accessToken": "NsYyDpehJqCVDewhy9UX",
+    "acid-gitlab-mr.favouriteProjects": [
+        "134421" // projectID
+    ],
+
+    // c/c++ && clangd
+    "C_Cpp.inlayHints.autoDeclarationTypes.enabled": false,
+    "C_Cpp.default.compilerPath": "/usr/bin/clang++",
+    "clang.cxxflags": [
+        "-std=c++17",
+        "-O3",
+        "-flto",
+        "-Wl",
+    ],
+    "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+    "C_Cpp.codeAnalysis.clangTidy.config": "${workspaceFolder}/.clang-tidy",
+    "C_Cpp.codeAnalysis.clangTidy.fallbackConfig": "${workspaceFolder}/.clang-tidy",
+    "C_Cpp.codeAnalysis.clangTidy.checks.enabled": [
+        "*"
+    ],
     "C_Cpp.errorSquiggles": "enabled",
-    "C_Cpp.intelliSenseEngineFallback": "enabled",
     "C_Cpp.intelliSenseEngine": "default",
+    // "C_Cpp.intelliSenseEngineFallback": "enabled",
     "C_Cpp.autocomplete": "default",
-    "clangd.path": "",
-    // "clangd.fallbackFlags": [
-    //     // 设置clangd代码检查的c++版本
-    //     "-std=c++17",
-    //     "-pedantic",
-    //     "-Wall",
-    //     "-Wextra",
-    //     "-Wcast-align",
-    //     "-Wdouble-promotion",
-    //     "-Wformat=2",
-    //     "-Wimplicit-fallthrough",
-    //     "-Wmisleading-indentation",
-    //     "-Wnon-virtual-dtor",
-    //     "-Wnull-dereference",
-    //     "-Wold-style-cast",
-    //     "-Woverloaded-virtual",
-    //     "-Wpedantic",
-    //     "-Wshadow",
-    //     "-Wunused",
-    //     "-pthread",
-    //     "-fuse-ld=lld",
-    //     "-fsanitize=address",
-    //     "-fsanitize=undefined",
-    //     "-stdlib=libc++",
+    "clangd.fallbackFlags": [
+        // 设置clangd代码检查的c++版本
+        "-std=c++17",
+        "-pedantic",
+        "-Wall",
+        "-Wextra",
+        "-Wcast-align",
+        "-Wdouble-promotion",
+        "-Wformat=2",
+        "-Wimplicit-fallthrough",
+        "-Wmisleading-indentation",
+        "-Wnon-virtual-dtor",
+        "-Wnull-dereference",
+        "-Wold-style-cast",
+        "-Woverloaded-virtual",
+        "-Wpedantic",
+        "-Wshadow",
+        "-Wunused",
+        "-pthread",
+        "-fuse-ld=lld",
+        "-fsanitize=address",
+        "-fsanitize=undefined",
+        "-stdlib=libc++",
+        "-Wno-unused-variable",
+        "-Wno-shadow",
+        "-Wshadow-field-in-constructor-modified",
+        "-Wshadow-ivar",
+        "-Wno-implicit-function-declaration",
+        "-Wno-switch",
+        "-Wno-parentheses",
+        "-Wbitwise-op-parentheses",
+        "-Wdangling-else",
+        "-Wlogical-not-parentheses",
+        "-Wlogical-op-parentheses",
+        "-Woverloaded-shift-op-parentheses",
+        "-Wparentheses-equality",
+        "-Wshift-op-parentheses",
 
-    //     "-I${workspaceFolder}/", // 项目根目录
-    //     // "-I~/pc_project/videoeditor/pc_config/vesdk/mac/_pod_work_dir/VESDK_Mac/include/",
-    //     "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/",
-    //     "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/",
-    //     "-I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/",
-    //     "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/",
-    //     "-I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/",
-    //     "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/",
-    //     "-I~/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/",
-    //     "-I/Users/bytedance/Mbox-Project-iOS/develop/Pods/TTVideoEditor",
-    // ],
-    // "clangd.arguments": [
-    //     "--all-scopes-completion",
-    //     "--clang-tidy-checks=performance-*, bugprone-*, misc-*, google-*, modernize-*, readability-*, portability-*",
-    //     "--header-insertion=never",
-    //     "--background-index",
-    //     "--compile-commands-dir=build/",
-    //     "--completion-parse=auto", // 当 clangd 准备就绪时，用它来分析建议
-    //     "-j=8",
-    //     "--cross-file-rename",
-    //     "--clang-tidy",
-    //     "--completion-style=detailed",
-    //     "--header-insertion=iwyu",
-    //     "--j=5",
-    //     "--pch-storage=disk",
-    //     "--log=verbose",
-    //     "--query-driver=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++"
-    // ],
+        "-DCCORE_MAC",
+        "-DCOREMAC",
+        "-DLYRA_API_EXPORT",
 
-    // 官网: https://clang.llvm.org/extra/clang-tidy/checks/list.html
-    // "C_Cpp.codeAnalysis.clangTidy.checks.enabled": [
-    //     "*",
-    //     // "google-*",
-    //     // "cppcoreguidelines-*",
-    //     // "clang-*",
-    //     // "readability-*",
-    //     // "clang-analyzer-*",
-    //     // "-clang-analyzer-cplusplus*",
-    //     "bugprone-argument-comment",
-    //     "bugprone-dangling-handle",
-    //     "bugprone-inaccurate-erase",
-    //     "bugprone-string-constructor",
-    //     "bugprone-string-integer-assignment",
-    //     "bugprone-unused-raii",
-    //     "bugprone-use-after-move",
-    //     "google-build-explicit-make-pair",
-    //     "google-explicit-constructor",
-    //     "google-readability-casting",
-    //     "modernize-avoid-bind",
-    //     "modernize-loop-convert",
-    //     "modernize-make-shared",
-    //     "modernize-make-unique",
-    //     "modernize-redundant-void-arg",
-    //     "modernize-replace-random-shuffle",
-    //     "modernize-shrink-to-fit",
-    //     "modernize-use-bool-literals",
-    //     "modernize-use-default-member-init",
-    //     "modernize-use-emplace",
-    //     "modernize-use-equals-default",
-    //     "modernize-use-equals-delete",
-    //     "modernize-use-noexcept",
-    //     "modernize-use-nullptr",
-    //     "modernize-use-override",
-    //     "modernize-use-transparent-functors",
-    //     "readability-redundant-member-init",
-    //     "clang-analyzer-core.uninitialized.UndefReturn",
-    //     "bugprone-posix-return",
-    //     "bugprone-unused-return-value",
-    //     "clang-analyzer-cplusplus.NewDeleteLeaks"
-    // ],
-    // "clang-tidy.compilerArgs": [
-    //     "-p /Users/bytedance/android-ndk-r21e/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/"
-    // ],
+        "-I${workspaceFolder}/videoeditor/src/",
+        "-I${workspaceFolder}/videoeditor/lyra/",
+        "-I${workspaceFolder}/videoeditor/libs/",
+        "-I${workspaceFolder}/videoeditor/platform/",
+        "-I${workspaceFolder}/videoeditor/generated/",
+        "-I${workspaceFolder}/videoeditor/",
+        "-I${workspaceFolder}/", // 项目根目录
+
+        "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/",
+        "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/",
+        "-I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/",
+        "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/",
+        "-I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/",
+        "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/",
+        "-I~/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/",
+        // "-I/Users/bytedance/Mbox-Project-iOS/develop/Pods/TTVideoEditor",
+        "-I~/pc_project/videoeditor/pc_config/vesdk/mac/_pod_work_dir/VESDK_Mac/include/"
+    ],
+    "clangd.arguments": [
+        // 全局补全(补全建议会给出在当前作用域不可见的索引,插入后自动补充作用域标识符),例如在main()中直接写cout,
+        // 即使没有`#include <iostream>`,也会给出`std::cout`的建议,配合"--header-insertion=iwyu",
+        // 还可自动插入缺失的头文件
+        "--all-scopes-completion",
+        // 补全函数时，将会给参数提供占位符，键入后按 Tab 可以切换到下一占位符，乃至函数末
+        "--function-arg-placeholders=true",
+        // 输入建议中，已包含头文件的项与还未包含头文件的项会以圆点加以区分
+        "--header-insertion-decorators",
+        "--clang-tidy", // 启用 Clang-Tidy 以提供「静态检查」
+        "--clang-tidy-checks=performance-*, bugprone-*, misc-*, google-*, modernize-*, readability-*, portability-*",
+        "--header-insertion=never",
+        "--background-index", // 后台分析并保存索引文件
+        "--compile-commands-dir=${workspaceFolder}/../build/",
+        "--completion-parse=auto", // 当 clangd 准备就绪时，用它来分析建议
+        "--j=8",
+        "--cross-file-rename",
+        "--completion-style=detailed",
+        "--pch-storage=memory", // pch 优化的位置(Memory 或 Disk,前者会增加内存开销，但会提升性能)
+        "--pretty", // 输出的 JSON 文件更美观
+        "--pch-storage=disk",
+        "--log=verbose",
+        // 启用配置文件(YAML格式)项目配置文件是在项目文件夹里的“.clangd”,用户配置文件是“clangd/config.yaml”,
+        // 该文件来自:Windows: %USERPROFILE%\AppData\Local || MacOS: ~/Library/Preferences/ || Others: $XDG_CONFIG_HOME, usually ~/.config
+        "--enable-config",
+        "--query-driver=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++"
+    ],
+    "clangd.checkUpdates": false,
+
+    // 使用Ninja编译时能更快一些，而且能看进度，生成VS的sln项目构建时看不到……
+    "cmake.generator": "Ninja",
+    // 设置并行编译数量，建议比核心数少1到2个，这个在我本地试的情况是能有效缓解白屏
+    // 在VS的Options>Projects and Solutions>Build And Run里虽然可以设置并行编译的数量，但个人实测对卡白屏的缓解效果有限
+    "cmake.parallelJobs": 8,
+    "cmake.configureArgs": [
+        "-DENABLE_PCH=0",
+        "-DCMAKE_OSX_ARCHITECTURES=arm64",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        // "-DCMAKE_C_COMPILER=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        // "-DCMAKE_CXX_COMPILER=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+        "-DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS} -g",
+        // "-DBUILD_OVERSEA=ON",
+        // "-DCMAKE_PRODUCT_TYPE=\"CapCut\"",
+        // "-DENABLE_MOJO=ON"
+    ],
 
 }

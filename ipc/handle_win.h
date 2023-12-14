@@ -26,6 +26,9 @@ namespace IPC {
 // The ownership semantics for the underlying |handle_| are complex. See
 // ipc/mach_port_mac.h (the OSX analog of this class) for an extensive
 // discussion.
+// HandleWin 是 Windows HANDLE 的包装器，可以跨支持附件代理的 Chrome IPC 通道进行传输。
+// HANDLE 将被复制到目标进程中。 底层 |handle_| 的所有权语义 很复杂。
+// 请参阅 ipc/mach_port_mac.h（此类的 OSX 模拟）进行广泛的讨论。
 class IPC_MESSAGE_SUPPORT_EXPORT HandleWin {
  public:
   // Default constructor makes an invalid HANDLE.
