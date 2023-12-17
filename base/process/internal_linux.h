@@ -71,8 +71,11 @@ enum ProcStatsFields {
   VM_STIME = 14,       // Time scheduled in kernel mode in clock ticks.
   VM_NUMTHREADS = 19,  // Number of threads.
   VM_STARTTIME = 21,   // The time the process started in clock ticks.
-  VM_VSIZE = 22,       // Virtual memory size in bytes.
-  VM_RSS = 23,         // Resident Set Size in pages.
+  VM_VSIZE = 22,       // Virtual memory size in bytes.(虚拟内存大小)
+
+  // cat /proc/pid/status
+  // 表示进程当前占用物理内存的大小(与procrank中的RSS)
+  VM_RSS = 23,         // Resident Set Size in pages.(驻留集大小，以页面为单位)
 };
 
 // Reads the |field_num|th field from |proc_stats|. Returns 0 on failure.
@@ -93,8 +96,7 @@ int64_t ReadProcStatsAndGetFieldAsInt64(pid_t pid, ProcStatsFields field_num);
 int64_t ReadProcSelfStatsAndGetFieldAsInt64(ProcStatsFields field_num);
 
 // Same as ReadProcStatsAndGetFieldAsInt64() but for size_t values.
-size_t ReadProcStatsAndGetFieldAsSizeT(pid_t pid,
-                                       ProcStatsFields field_num);
+size_t ReadProcStatsAndGetFieldAsSizeT(pid_t pid, ProcStatsFields field_num);
 
 // Returns the time that the OS started. Clock ticks are relative to this.
 Time GetBootTime();

@@ -46,6 +46,7 @@ bool UncheckedCalloc(size_t num_items, size_t size, void** result) {
 
 void EnableTerminationOnOutOfMemory() {
   // Step 1: Enable OOM killer on C++ failures.
+  // C++ 标准库函数 std::set_new_handler 用于设置 new 运算符在无法分配足够内存时应调用的处理函数
   std::set_new_handler(oom_killer_new);
 
 // Step 2: Enable OOM killer on C-malloc failures for the default zone (if we

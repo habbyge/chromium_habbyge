@@ -28,8 +28,8 @@
 namespace base {
 namespace internal {
 
+// Linux系统数据的两个目录
 const char kProcDir[] = "/proc";
-
 const char kStatFile[] = "stat";
 
 FilePath GetProcPidDir(pid_t pid) {
@@ -161,15 +161,14 @@ int64_t ReadProcSelfStatsAndGetFieldAsInt64(ProcStatsFields field_num) {
   return ReadStatFileAndGetFieldAsInt64(stat_file, field_num);
 }
 
-size_t ReadProcStatsAndGetFieldAsSizeT(pid_t pid,
-                                       ProcStatsFields field_num) {
+size_t ReadProcStatsAndGetFieldAsSizeT(pid_t pid, ProcStatsFields field_num) {
   std::string stats_data;
   if (!ReadProcStats(pid, &stats_data))
     return 0;
   std::vector<std::string> proc_stats;
-  if (!ParseProcStats(stats_data, &proc_stats))
+  if (!ParseProcStats(stats_data, &proc_stats)) // TODO(GXL)
     return 0;
-  return GetProcStatsFieldAsSizeT(proc_stats, field_num);
+  return GetProcStatsFieldAsSizeT(proc_stats, field_num); // TODO(GXL)
 }
 
 Time GetBootTime() {

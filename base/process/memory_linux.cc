@@ -27,6 +27,9 @@ namespace base {
 
 namespace {
 
+/**
+ * @brief 当new分配失败时，调用这个函数：释放保留的地址空间，释放失败的话，std::terminate()终止进程
+ */
 void ReleaseReservationOrTerminate() {
   if (internal::ReleaseAddressSpaceReservation())
     return;
@@ -41,6 +44,7 @@ void EnableTerminationOnHeapCorruption() {
 
 void EnableTerminationOnOutOfMemory() {
   // Set the new-out of memory handler.
+  // C++ 标准库函数 std::set_new_handler 用于设置 new 运算符在无法分配足够内存时应调用的处理函数
   std::set_new_handler(&ReleaseReservationOrTerminate);
   // If we're using glibc's allocator, the above functions will override
   // malloc and friends and make them die on out of memory.
@@ -59,6 +63,10 @@ void EnableTerminationOnOutOfMemory() {
 // parameter used in AdjustOOMScore(). Specifically, ProcessId is a typedef
 // and we'll need to include another header file in thread_restrictions.h
 // without the class.
+// ScopedAllowBlocking() 有private构造函数，它只能在友元类/函数中使用。
+// 在这种情况下，声明一个类会更容易，以避免由于在AdjustOOMScore() 中使用的参数而增加对 
+// thread_restrictions.h 的更多依赖。
+// 具体来说，ProcessId 是一个 typedef，我们需要在 thread_restrictions.h 中包含另一个没有该类的头文件。
 class AdjustOOMScoreHelper {
  public:
   AdjustOOMScoreHelper() = delete;

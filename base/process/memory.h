@@ -52,7 +52,7 @@ BASE_EXPORT bool AdjustOOMScore(ProcessId process, int score);
 namespace internal {
 // Returns true if address-space was released. Some configurations reserve part
 // of the process address-space for special allocations (e.g. WASM).
-bool ReleaseAddressSpaceReservation();
+bool ReleaseAddressSpaceReservation(); // 释放保留的地址空间
 }  // namespace internal
 
 #if defined(OS_WIN)

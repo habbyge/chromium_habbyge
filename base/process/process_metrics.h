@@ -126,6 +126,12 @@ class BASE_EXPORT ProcessMetrics {
   //
   // Since this API measures usage over an interval, it will return zero on the
   // first call, and an actual value only on the second and subsequent calls.
+  // 返回自上次调用该方法以来的时间间隔内，进程的所有线程执行所花费的时间百分比。
+  // 由于这考虑了进程中所有线程的总执行时间，因此在多核系统上运行的多线程进程中，结果很容易超过100%。
+  // 一般来说，结果是 0% 到 SysInfo::NumberOfProcessors() * 100% 范围内的值。
+  //
+  // 要获取该进程在该时间间隔内消耗的总可用 CPU 资源的百分比，调用者必须除以 NumberOfProcessors()。
+  // 由于此 API 测量一段时间间隔内的使用情况，因此它将在第一次调用时返回零，仅在第二次及后续调用时返回实际值。
   double GetPlatformIndependentCPUUsage() WARN_UNUSED_RESULT;
 
   // Returns the cumulative CPU usage across all threads of the process since
@@ -209,8 +215,7 @@ class BASE_EXPORT ProcessMetrics {
   uint64_t GetCumulativeDiskUsageInBytes();
 
 #if defined(OS_POSIX)
-  // Returns the number of file descriptors currently open by the process, or
-  // -1 on error.
+  // Returns the number of file descriptors currently open by the process, or -1 on error.
   int GetOpenFdCount() const;
 
   // Returns the soft limit of file descriptors that can be opened by the
@@ -351,8 +356,7 @@ struct BASE_EXPORT SystemMemoryInfoKB {
   int avail_phys = 0;
 #endif
 
-#if defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_ANDROID) || \
-    defined(OS_AIX)
+#if defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_ANDROID) || defined(OS_AIX)
   // This provides an estimate of available memory as described here:
   // https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=34e431b0ae398fc54ea69ff85ec700722c9da773
   // NOTE: this is ONLY valid in kernels 3.14 and up.  Its value will always

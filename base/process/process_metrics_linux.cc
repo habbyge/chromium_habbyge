@@ -167,22 +167,19 @@ bool SupportsPerTaskTimeInState() {
 }  // namespace
 
 // static
-std::unique_ptr<ProcessMetrics> ProcessMetrics::CreateProcessMetrics(
-    ProcessHandle process) {
+std::unique_ptr<ProcessMetrics> ProcessMetrics::CreateProcessMetrics(ProcessHandle process) {
   return WrapUnique(new ProcessMetrics(process));
 }
 
 size_t ProcessMetrics::GetResidentSetSize() const {
-  return internal::ReadProcStatsAndGetFieldAsSizeT(process_, internal::VM_RSS) *
-      getpagesize();
+  return internal::ReadProcStatsAndGetFieldAsSizeT(process_, internal::VM_RSS) * getpagesize();
 }
 
 TimeDelta ProcessMetrics::GetCumulativeCPUUsage() {
   return internal::ClockTicksToTimeDelta(GetProcessCPU(process_));
 }
 
-bool ProcessMetrics::GetCumulativeCPUUsagePerThread(
-    CPUUsagePerThread& cpu_per_thread) {
+bool ProcessMetrics::GetCumulativeCPUUsagePerThread(CPUUsagePerThread& cpu_per_thread) {
   cpu_per_thread.clear();
 
   internal::ForEachProcessTask(

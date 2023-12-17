@@ -45,6 +45,11 @@ extern const Feature kMacAllowBackgroundingProcesses;
 // POSIX: The underlying ProcessHandle is not guaranteed to remain valid after
 // the process dies, and it may be reused by the system, which means that it may
 // end up pointing to the wrong process.
+// 提供进程的仅移动封装。
+// 该对象与底层进程的生命周期无关：进程可能被终止，而该对象可能仍然存在，并且它仍然声称有效。
+// 这种情况下的实际行为取决于操作系统，如下所示：
+// Windows：底层的ProcessHandle在进程死亡后才有效，可以用来收集有关该进程的一些信息，但大多数方法显然会失败。
+// POSIX：不保证底层的ProcessHandle在进程死亡后仍然有效，并且它可能被系统重用，这意味着它最终可能指向错误的进程。
 class BASE_EXPORT Process {
  public:
   // On Windows, this takes ownership of |handle|. On POSIX, this does not take

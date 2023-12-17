@@ -182,13 +182,10 @@ bool TextContentsEqual(const FilePath& filename1, const FilePath& filename2) {
 #endif  // !defined(OS_NACL_NONSFI)
 
 bool ReadStreamToString(FILE* stream, std::string* contents) {
-  return ReadStreamToStringWithMaxSize(
-      stream, std::numeric_limits<size_t>::max(), contents);
+  return ReadStreamToStringWithMaxSize(stream, std::numeric_limits<size_t>::max(), contents);
 }
 
-bool ReadStreamToStringWithMaxSize(FILE* stream,
-                                   size_t max_size,
-                                   std::string* contents) {
+bool ReadStreamToStringWithMaxSize(FILE* stream, size_t max_size, std::string* contents) {
   if (contents)
     contents->clear();
 
@@ -267,13 +264,10 @@ bool ReadStreamToStringWithMaxSize(FILE* stream,
 }
 
 bool ReadFileToString(const FilePath& path, std::string* contents) {
-  return ReadFileToStringWithMaxSize(path, contents,
-                                     std::numeric_limits<size_t>::max());
+  return ReadFileToStringWithMaxSize(path, contents, std::numeric_limits<size_t>::max());
 }
 
-bool ReadFileToStringWithMaxSize(const FilePath& path,
-                                 std::string* contents,
-                                 size_t max_size) {
+bool ReadFileToStringWithMaxSize(const FilePath& path, std::string* contents, size_t max_size) {
   if (contents)
     contents->clear();
   if (path.ReferencesParent())

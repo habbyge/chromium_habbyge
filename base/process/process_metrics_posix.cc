@@ -131,6 +131,7 @@ size_t GetMallocUsageMallinfo() {
 
 size_t ProcessMetrics::GetMallocUsage() {
 #if defined(OS_APPLE)
+// malloc_statistics_t 数据类型是macos中的<malloc/malloc.h>
   malloc_statistics_t stats = {0};
   malloc_zone_statistics(nullptr, &stats);
   return stats.size_in_use;
