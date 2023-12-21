@@ -79,8 +79,7 @@ class PlatformThreadRef {
   RefType id_ = 0;
 };
 
-BASE_EXPORT std::ostream& operator<<(std::ostream& os,
-                                     const PlatformThreadRef& ref);
+BASE_EXPORT std::ostream& operator<<(std::ostream& os, const PlatformThreadRef& ref);
 
 // Used to operate on threads.
 class PlatformThreadHandle {

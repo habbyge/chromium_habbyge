@@ -71,10 +71,14 @@ enum ProcStatsFields {
   VM_STIME = 14,       // Time scheduled in kernel mode in clock ticks.
   VM_NUMTHREADS = 19,  // Number of threads.
   VM_STARTTIME = 21,   // The time the process started in clock ticks.
-  VM_VSIZE = 22,       // Virtual memory size in bytes.(虚拟内存大小)
 
+  // 表示进程当前占用虚拟内存的大小
+  VM_VSIZE = 22,       // Virtual memory size in bytes.(虚拟内存大小)
   // cat /proc/pid/status
   // 表示进程当前占用物理内存的大小(与procrank中的RSS)
+  // 虚拟内存驻留集合大小，这是驻留在物理内存的一部分。它没有交换到硬盘。它包括代码，数据和栈；
+  // 常驻内存是进程实际使用的物理内存，不过，它不包括 Swap 和共享内存。
+  // 一般会换算成占系统总内存的百分比，也就是进程的内存使用率。
   VM_RSS = 23,         // Resident Set Size in pages.(驻留集大小，以页面为单位)
 };
 

@@ -60,6 +60,9 @@ struct IoCounters;
 //
 // minor: Number of page faults that didn't require disk IO.
 // major: Number of page faults that required disk IO.
+// 自进程创建以来的次要和主要页面错误计数。这两个计数都是进程范围的，并且不包括子进程。
+// minor：不需要磁盘 IO 的页面错误数。
+// Major：需要磁盘 IO 的页面错误数。
 struct PageFaultCounts {
   int64_t minor;
   int64_t major;
@@ -92,8 +95,7 @@ class BASE_EXPORT ProcessMetrics {
 
   // Creates a ProcessMetrics for the specified process.
 #if !defined(OS_MAC)
-  static std::unique_ptr<ProcessMetrics> CreateProcessMetrics(
-      ProcessHandle process);
+  static std::unique_ptr<ProcessMetrics> CreateProcessMetrics(ProcessHandle process);
 #else
 
   // The port provider needs to outlive the ProcessMetrics object returned by
@@ -111,6 +113,7 @@ class BASE_EXPORT ProcessMetrics {
 #if defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_ANDROID)
   // Resident Set Size is a Linux/Android specific memory concept. Do not
   // attempt to extend this to other platforms.
+  // Resident Set Size 是特定于 Linux/Android 的内存概念。不要尝试将其扩展到其他平台。
   BASE_EXPORT size_t GetResidentSetSize() const;
 #endif
 
@@ -138,10 +141,12 @@ class BASE_EXPORT ProcessMetrics {
   // process start. In case of multi-core processors, a process can consume CPU
   // at a rate higher than wall-clock time, e.g. two cores at full utilization
   // will result in a time delta of 2 seconds/per 1 wall-clock second.
+  // 获取累计的CPU使用率。
+  // 返回自进程启动以来进程中所有线程的累计 CPU 使用率。在多核处理器的情况下，进程可以以高于挂钟
+  // 时间的速率消耗 CPU，例如，两个内核在充分利用时将导致 2 秒/每 1 个挂钟秒的时间增量。
   TimeDelta GetCumulativeCPUUsage() WARN_UNUSED_RESULT;
 
-#if defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_ANDROID) || \
-    defined(OS_AIX)
+#if defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_ANDROID) || defined(OS_AIX)
   // Emits the cumulative CPU usage for all currently active threads since they
   // were started into the output parameter (replacing its current contents).
   // Threads that have already terminated will not be reported. Thus, the sum of
@@ -242,22 +247,18 @@ class BASE_EXPORT ProcessMetrics {
   ProcessMetrics(ProcessHandle process, PortProvider* port_provider);
 #endif  // !defined(OS_MAC)
 
-#if defined(OS_APPLE) || defined(OS_LINUX) || defined(OS_CHROMEOS) || \
-    defined(OS_AIX)
+#if defined(OS_APPLE) || defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_AIX)
   int CalculateIdleWakeupsPerSecond(uint64_t absolute_idle_wakeups);
 #endif
 #if defined(OS_APPLE)
   // The subset of wakeups that cause a "package exit" can be tracked on macOS.
   // See |GetPackageIdleWakeupsForSecond| comment for more info.
-  int CalculatePackageIdleWakeupsPerSecond(
-      uint64_t absolute_package_idle_wakeups);
+  int CalculatePackageIdleWakeupsPerSecond(uint64_t absolute_package_idle_wakeups);
 #endif
 
-#if defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_ANDROID) || \
-    defined(OS_AIX)
+#if defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_ANDROID) || defined(OS_AIX)
   CPU::CoreType GetCoreType(int core_index);
-#endif  // defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_ANDROID) ||
-        // defined(OS_AIX)
+#endif  // defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_ANDROID) || defined(OS_AIX)
 
 #if defined(OS_WIN)
   win::ScopedHandle process_;
