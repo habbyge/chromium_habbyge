@@ -44,9 +44,9 @@ bool OSMetrics::FillOSMemoryDump(base::ProcessId pid,
   if (::GetProcessMemoryInfo(::GetCurrentProcess(),
                              reinterpret_cast<PROCESS_MEMORY_COUNTERS*>(&pmc),
                              sizeof(pmc))) {
+    // 包括物理内存（工作集）和虚拟内存（页面文件使用）
     dump->platform_private_footprint->private_bytes = pmc.PrivateUsage;
-    dump->resident_set_kb =
-        base::saturated_cast<uint32_t>(pmc.WorkingSetSize / 1024);
+    dump->resident_set_kb = base::saturated_cast<uint32_t>(pmc.WorkingSetSize / 1024);
   }
   return true;
 }

@@ -42,7 +42,7 @@ bool MemoryUsageMonitorWin::CalculateProcessMemoryFootprint(
                               reinterpret_cast<PROCESS_MEMORY_COUNTERS*>(&pmc),
                               sizeof(pmc)))
     return false;
-  *private_footprint = pmc.PrivateUsage;
+  *private_footprint = pmc.PrivateUsage; // 进程已经使用的内存大小
   return true;
 }
 

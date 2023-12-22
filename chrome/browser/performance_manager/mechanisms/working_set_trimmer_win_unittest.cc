@@ -45,7 +45,8 @@ size_t GetWorkingSetSizeMb(base::ProcessHandle handle) {
   if (::GetProcessMemoryInfo(handle,
                              reinterpret_cast<PROCESS_MEMORY_COUNTERS*>(&pmc),
                              sizeof(pmc))) {
-    return pmc.WorkingSetSize / 1024 / 1024;
+    // 物理内存（工作集WorkingSet）和虚拟内存（页面文件使用）
+    return pmc.WorkingSetSize / 1024 / 1024; // 获取当前进程使用了多少物理内存
   }
 
   ADD_FAILURE() << "GetProcessMemoryInfo failed";

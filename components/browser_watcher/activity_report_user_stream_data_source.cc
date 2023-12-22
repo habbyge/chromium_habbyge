@@ -178,6 +178,7 @@ void CollectProcessPerformanceMetrics(
   base::Process process(base::Process::OpenWithAccess(
       pid, PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_VM_READ));
 
+  // 包括物理内存（工作集）和虚拟内存（页面文件使用）的使用量
   if (process.IsValid()) {
     PROCESS_MEMORY_COUNTERS_EX process_memory = {sizeof(process_memory)};
     if (::GetProcessMemoryInfo(
@@ -187,8 +188,8 @@ void CollectProcessPerformanceMetrics(
       // This is in units of bytes, re-scale to pages for consistency with
       // system metrics.
       const uint64_t kPageSize = 4096;
-      memory_state->set_process_private_usage(process_memory.PrivateUsage /
-                                              kPageSize);
+      memory_state->set_process_private_usage(
+          process_memory.PrivateUsage / kPageSize);
       memory_state->set_process_peak_workingset_size(
           process_memory.PeakWorkingSetSize / kPageSize);
       memory_state->set_process_peak_pagefile_usage(

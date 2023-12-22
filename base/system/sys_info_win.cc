@@ -87,8 +87,8 @@ int64_t SysInfo::AmountOfVirtualMemory() {
 
 // static
 int64_t SysInfo::AmountOfFreeDiskSpace(const FilePath& path) {
-  base::ScopedBlockingCall scoped_blocking_call(FROM_HERE,
-                                                base::BlockingType::MAY_BLOCK);
+  base::ScopedBlockingCall scoped_blocking_call(
+      FROM_HERE, base::BlockingType::MAY_BLOCK);
 
   int64_t available;
   if (!GetDiskSpaceInfo(path, &available, nullptr))
@@ -98,8 +98,9 @@ int64_t SysInfo::AmountOfFreeDiskSpace(const FilePath& path) {
 
 // static
 int64_t SysInfo::AmountOfTotalDiskSpace(const FilePath& path) {
-  base::ScopedBlockingCall scoped_blocking_call(FROM_HERE,
-                                                base::BlockingType::MAY_BLOCK);
+  base::ScopedBlockingCall scoped_blocking_call(
+      FROM_HERE,
+      base::BlockingType::MAY_BLOCK);
 
   int64_t total;
   if (!GetDiskSpaceInfo(path, nullptr, &total))
