@@ -1,5 +1,7 @@
 # Mojo
 
+Mojo 提供了一小套IPC抽象，MessagePipe, DataPipe和SharedBuffer。并在此API之上，构建了更高级别的绑定API，以简化IPC接口/消息传递时编写C++，Java或JavaScript代码。
+
 [TOC]
 
 ## Getting Started With Mojo
