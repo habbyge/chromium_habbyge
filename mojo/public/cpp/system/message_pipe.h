@@ -123,8 +123,8 @@ inline MojoResult FuseMessagePipes(ScopedMessagePipeHandle message_pipe0,
                               message_pipe1.release().value(), nullptr);
 }
 
-// A wrapper class that automatically creates a message pipe and owns both
-// handles.
+// A wrapper class that automatically creates a message pipe and owns both handles.
+// 自动创建消息管道并拥有两个句柄的包装类
 class MessagePipe {
  public:
   MessagePipe();

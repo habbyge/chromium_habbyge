@@ -189,9 +189,9 @@
         "*"
     ],
     "C_Cpp.errorSquiggles": "disabled",
-    "C_Cpp.intelliSenseEngine": "default",
-    // "C_Cpp.intelliSenseEngineFallback": "enabled",
-    "C_Cpp.autocomplete": "default",
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "C_Cpp.intelliSenseEngineFallback": "disabled",
+    "C_Cpp.autocomplete": "disabled",
     "clangd.fallbackFlags": [
         // 设置clangd代码检查的c++版本
         "-std=c++17",
@@ -296,6 +296,13 @@
         // "-DBUILD_OVERSEA=ON",
         // "-DCMAKE_PRODUCT_TYPE=\"CapCut\"",
         // "-DENABLE_MOJO=ON"
+    ],
+    "java.project.sourcePaths": [
+        "chrome/android/javatests/src",
+        "chrome/android/java/src",
+        "chrome/android/feed/core/java/src",
+        "chrome/android/features/android_library_factory/test/java/src",
+        "chrome/android"
     ],
 
 }

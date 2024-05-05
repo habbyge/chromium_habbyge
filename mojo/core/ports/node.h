@@ -66,6 +66,14 @@ class NodeDelegate;
 // by Nodes to coordinate Port behavior and lifetime within and across Nodes.
 // See Event documentation for description of different types of events used by
 // a Node to coordinate behavior.
+//
+// Mojo与其他ipc不同的是，Mojo是形成一个网络，任意两个进程之间都可以通信，其他ipc大多仅支持
+// 2个进程之间通信，一个Mojo进程内有且只能有1个Node，每一个Node有多个Port，每个Port对应1个
+// 服务，类似tcp/ip中的ip地址和端口的概念；
+// 一个 Node::Port 唯一确定一个服务，Node与Node之间通过Channel通信，Chanel在不同OS上有
+// 不同实现，Linux是domain Socket；windows是named pipe；Mac是Mach Ports；
+// 在Port上一层，Mojo封装了3个 ”应用层协议“，分别为 MessagePipe、DataPipe和SharedBuffer
+// 类似于Tcp上封装了http、smtp等；
 class COMPONENT_EXPORT(MOJO_CORE_PORTS) Node {
  public:
   enum class ShutdownPolicy {

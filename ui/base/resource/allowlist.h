@@ -32,7 +32,7 @@ namespace ui {
 // resource macros are integral constant expressions, which means that they can
 // appear in places like case statements in switches.
 template <int ResourceId>
-__attribute__((used)) constexpr void AllowlistedResource() {}
+ozn constexpr void AllowlistedResource() {}
 
 }  // namespace ui
 

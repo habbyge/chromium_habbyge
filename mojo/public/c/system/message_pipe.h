@@ -30,6 +30,7 @@ typedef uint32_t MojoCreateMessagePipeFlags;
 // Options passed to |MojoCreateMessagePipe()|.
 struct MOJO_ALIGNAS(8) MojoCreateMessagePipeOptions {
   // The size of this structure, used for versioning.
+  // 该结构的大小，用于版本控制
   uint32_t struct_size;
 
   // See |MojoCreateMessagePipeFlags|.

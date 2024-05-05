@@ -29,6 +29,12 @@
 #include "mojo/public/c/system/types.h"
 #include "mojo/public/cpp/platform/platform_handle.h"
 
+/**
+ * @brief 当业务调用mojo公共api时，它们会通过dispatcher调度函数，然后将调用转发到mojo::core::Core
+ * 的全局实例，Core进一步分发对实现实例的调用，实现的实例是：mojo::core::Dispatcher 或
+ * mojo::core::UserMessageImpl，MojoHandler会在mojo::core::HandleTable中查找返回与MojoHandle
+ * 对应的 Dispatcher，再调用Dispatcher子类实现的具体函数。
+ */
 namespace mojo {
 namespace core {
 
