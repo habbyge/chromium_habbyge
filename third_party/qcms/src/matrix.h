@@ -25,7 +25,7 @@
 #define _QCMS_MATRIX_H
 
 struct vector {
-        float v[3];
+  float v[3];
 };
 
 struct vector matrix_eval(struct matrix mat, struct vector v);

@@ -173,7 +173,9 @@ class InlinedStructPtr {
     new (&value_) Struct();
   }
 
-  bool is_null() const { return state_ == NIL; }
+  bool is_null() const {
+    return state_ == NIL;
+  }
 
   Struct& operator*() const {
     DCHECK(state_ == VALID);

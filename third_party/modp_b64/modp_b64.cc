@@ -117,8 +117,7 @@ size_t modp_b64_encode(char* dest, const char* str, size_t len) {
 }
 
 #ifdef WORDS_BIGENDIAN   /* BIG ENDIAN -- SUN / IBM / MOTOROLA */
-int modp_b64_decode(char* dest, const char* src, int len)
-{
+int modp_b64_decode(char* dest, const char* src, int len) {
     if (len == 0) return 0;
 
 #ifdef DOPAD

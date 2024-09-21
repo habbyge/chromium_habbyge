@@ -304,5 +304,9 @@
         "chrome/android/features/android_library_factory/test/java/src",
         "chrome/android"
     ],
+    "gitConfigUser.selectedProfile": "gexianglin",
+    "commentTranslate.multiLineMerge": true,
+    "commentTranslate.source": "Google",
+    "commentTranslate.targetLanguage": "zh-CN",
 
 }

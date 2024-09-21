@@ -25,8 +25,7 @@
 #include "qcmsint.h"
 #include "matrix.h"
 
-struct vector matrix_eval(struct matrix mat, struct vector v)
-{
+struct vector matrix_eval(struct matrix mat, struct vector v) {
 	struct vector result;
 	result.v[0] = mat.m[0][0]*v.v[0] + mat.m[0][1]*v.v[1] + mat.m[0][2]*v.v[2];
 	result.v[1] = mat.m[1][0]*v.v[0] + mat.m[1][1]*v.v[1] + mat.m[1][2]*v.v[2];
@@ -36,8 +35,7 @@ struct vector matrix_eval(struct matrix mat, struct vector v)
 
 //XXX: should probably pass by reference and we could
 //probably reuse this computation in matrix_invert
-float matrix_det(struct matrix mat)
-{
+float matrix_det(struct matrix mat) {
 	float det;
 	det = mat.m[0][0]*mat.m[1][1]*mat.m[2][2] +
 		mat.m[0][1]*mat.m[1][2]*mat.m[2][0] +
@@ -52,8 +50,7 @@ float matrix_det(struct matrix mat)
 /* lcms uses gauss-jordan elimination with partial pivoting which is
  * less efficient and not as numerically stable. See Mathematics for
  * Game Programmers. */
-struct matrix matrix_invert(struct matrix mat)
-{
+struct matrix matrix_invert(struct matrix mat) {
 	struct matrix dest_mat;
 	int i,j;
 	static int a[3] = { 2, 2, 1 };
